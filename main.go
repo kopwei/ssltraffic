@@ -4,7 +4,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/urfave/cli"
 	"os"
-	"ssltraffictest/cmd"
+	"github.com/kopwei/ssltraffic/cmd"
 )
 
 // VERSION is the global value for software version
