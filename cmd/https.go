@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"bytes"
-	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
 	"net/http"
 	"net/url"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/urfave/cli"
 )
 
 func HTTPS() cli.Command {
@@ -27,8 +28,8 @@ func HTTPS() cli.Command {
 func httpsAction(ctx *cli.Context) error {
 	client := &http.Client{}
 	reqURL := &url.URL{
-		Host: ctx.String("target"),
-		Path: "/",
+		Host:   ctx.String("target"),
+		Path:   "/",
 		Scheme: "https",
 	}
 	req, err := http.NewRequest("GET", reqURL.String(), bytes.NewBuffer([]byte("")))

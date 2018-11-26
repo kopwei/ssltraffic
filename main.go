@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
 	"os"
+
+	"github.com/Sirupsen/logrus"
 	"github.com/kopwei/ssltraffic/cmd"
+	"github.com/urfave/cli"
 )
 
 // VERSION is the global value for software version

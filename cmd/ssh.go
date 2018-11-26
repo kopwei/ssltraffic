@@ -1,13 +1,14 @@
 package cmd
 
 import (
-	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
-	"golang.org/x/crypto/ssh"
 	"io/ioutil"
 	"net"
 	"os/user"
 	"time"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/urfave/cli"
+	"golang.org/x/crypto/ssh"
 )
 
 func SSH() cli.Command {
@@ -163,10 +164,10 @@ func genSSHTraffic(ctx *cli.Context) error {
 		logrus.Warn("Key file reading failed, won't use it")
 	}
 	d := &dialer{username: ctx.String("user"),
-		password:   ctx.String("password"),
-		sshAddress: ctx.String("target"),
+		password:     ctx.String("password"),
+		sshAddress:   ctx.String("target"),
 		sshKeyString: keyString,
-		}
+	}
 	logrus.Infof("Starting to establish ssh conn to host %s", d.sshAddress)
 	c, err := getSSHClient(d)
 	if err != nil {

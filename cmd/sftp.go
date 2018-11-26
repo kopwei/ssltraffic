@@ -2,13 +2,14 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
-	"golang.org/x/crypto/ssh"
-	"github.com/pkg/sftp"
 	"io"
 	"os"
 	"path"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/pkg/sftp"
+	"github.com/urfave/cli"
+	"golang.org/x/crypto/ssh"
 )
 
 func SFTP() cli.Command {
@@ -64,7 +65,11 @@ func sftpAction(ctx *cli.Context) error {
 			return err
 		}
 		defer f.Close()
-		localFile, err := os.Create(path.Join(os.TempDir(), path.Base(ctx.String("file"))))
+		dir, err := os.Getwd()
+		if err != nil {
+			logrus.Fatal(err)
+		}
+		localFile, err := os.Create(path.Join(dir, path.Base(ctx.String("file"))))
 		if err != nil {
 			logrus.Errorf("Unable to create local file with name %s", path.Base(ctx.String("file")))
 			return err
@@ -79,7 +84,6 @@ func sftpAction(ctx *cli.Context) error {
 	logrus.Infof("SFTP connection towards target %s finishes", ctx.String("target"))
 	return nil
 }
-
 
 func establishSSHTunnelConnection(ctx *cli.Context) (*ssh.Client, error) {
 	logrus.Infof("Establishing SSH connection towards %s", ctx.String("target"))
