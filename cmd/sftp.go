@@ -44,6 +44,7 @@ func SFTP() cli.Command {
 }
 
 func sftpAction(ctx *cli.Context) error {
+	logrus.Infof("SFTP connection towards target %s starts", ctx.String("target"))
 	conn, err := establishSSHTunnelConnection(ctx)
 	if err != nil {
 		logrus.Error("Unable to establish ssh connection towards target")
@@ -75,12 +76,13 @@ func sftpAction(ctx *cli.Context) error {
 		}
 		logrus.Infof("Remote file downloaded to local successfully")
 	}
+	logrus.Infof("SFTP connection towards target %s finishes", ctx.String("target"))
 	return nil
 }
 
 
 func establishSSHTunnelConnection(ctx *cli.Context) (*ssh.Client, error) {
-	logrus.Debugf("Establishing SSH connection towards switch %s", ctx.String("target"))
+	logrus.Infof("Establishing SSH connection towards %s", ctx.String("target"))
 	config := &ssh.ClientConfig{
 		User: ctx.String("user"),
 		Auth: []ssh.AuthMethod{
