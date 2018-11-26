@@ -80,13 +80,15 @@ func (c *Conn) Write(b []byte) (int, error) {
 }
 
 func getSSHConfig(username, password, sshPrivateKeyString string) (*ssh.ClientConfig, error) {
-	signer, err := getPrivateKeySigner(sshPrivateKeyString)
-	if err != nil {
-		return nil, err
-	}
-	auth := []ssh.AuthMethod{ssh.PublicKeys(signer)}
+	var auth []ssh.AuthMethod
 	if password != "" {
 		auth = append(auth, ssh.Password(password))
+	} else {
+		signer, err := getPrivateKeySigner(sshPrivateKeyString)
+		if err != nil {
+			return nil, err
+		}
+		auth = append(auth, ssh.PublicKeys(signer))
 	}
 	config := &ssh.ClientConfig{
 		User:            username,

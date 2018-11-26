@@ -43,6 +43,6 @@ func httpsAction(ctx *cli.Context) error {
 		logrus.Error(err)
 		return err
 	}
-	logrus.Info("%v", resp)
+	logrus.Infof("%v", resp)
 	return nil
 }
