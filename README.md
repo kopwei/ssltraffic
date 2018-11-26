@@ -3,7 +3,11 @@ Establish traffic for testing purpose
 
 ## Build
 ```bash
-$ docker run -it --rm -v $PWD:/go/ssltraffic go build -o /go/ssltraffic/ssltraffic ssltraffic
+$ cd /path_to_repo
+$ docker run -it --rm \
+    -v $PWD:/go/src/github.com/kopwei/ssltraffic golang:1.11.2 \
+    go build -o /go/src/github.com/kopwei/ssltraffic/ssltraffic \
+    github.com/kopwei/ssltraffic
 ```
 
 ## Run
